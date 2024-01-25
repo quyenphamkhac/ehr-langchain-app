@@ -2,6 +2,7 @@ from dotenv import load_dotenv
 from langchain_community.vectorstores.chroma import Chroma
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain.chains import RetrievalQA
+from langchain.callbacks.tracers import ConsoleCallbackHandler
 
 load_dotenv()
 
@@ -21,6 +22,6 @@ chain = RetrievalQA.from_chain_type(
 
 result = chain.invoke({
     "query":  "What is an interesting fact about the English language?"
-})
+}, config={'callbacks': [ConsoleCallbackHandler()]})
 
 print(result)
