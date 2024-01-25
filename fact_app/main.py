@@ -34,12 +34,3 @@ db = Chroma.from_documents(
     embedding=embeddings,
     persist_directory="chroma/factos"
 )
-
-results = db.similarity_search(
-    "What is an interesting fact about the English language?",
-    k=1
-)
-
-for result in results:
-    print("\n")
-    print(result.page_content)
