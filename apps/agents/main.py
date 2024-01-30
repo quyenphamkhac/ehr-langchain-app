@@ -9,11 +9,16 @@ from langchain.agents import AgentExecutor, create_openai_functions_agent
 from langchain.memory import ConversationBufferMemory
 from tools.sql import run_query_tool, list_tables, decscribe_tables_tool
 from tools.report import write_report_tool
+from handlers.chat_model_start_handler import ChatModelStartHandler
+
 from dotenv import load_dotenv
 
 load_dotenv()
 
-chat = ChatOpenAI()
+handler = ChatModelStartHandler()
+chat = ChatOpenAI(
+    callbacks=[handler]
+)
 
 tables = list_tables()
 prompt = ChatPromptTemplate(
@@ -51,9 +56,9 @@ agent_executor = AgentExecutor(
 )
 
 agent_executor.invoke({
-    "input": "How many orders are there? Write the result to an html report."
+    "input": "How many orders are there?"
 })
 
-agent_executor.invoke({
-    "input": "Repeat the exact same process for users."
-})
+# agent_executor.invoke({
+#     "input": "Repeat the exact same process for users."
+# })
