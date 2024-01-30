@@ -15,6 +15,7 @@ chromadb = "^0.4.22"
 python-dotenv = "^1.0.1"
 langchain-openai = "^0.0.3"
 pyboxen = "^1.2.0"
+pydantic = "^2.6.0"
 
 
 [build-system]
