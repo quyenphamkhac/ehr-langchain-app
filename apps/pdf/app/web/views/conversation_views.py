@@ -43,7 +43,7 @@ def create_message(conversation):
     )
 
     chat = build_chat(chat_args)
-
+    print(input)
     if not chat:
         return "Chat not yet implemented!"
 
@@ -52,4 +52,5 @@ def create_message(conversation):
             stream_with_context(chat.stream(input)), mimetype="text/event-stream"
         )
     else:
-        return jsonify({"role": "assistant", "content": chat.run(input)})
+        response = chat.invoke({"question": input})
+        return jsonify({"role": "assistant", "content": response["answer"]})

@@ -10,3 +10,10 @@ index = pc.Index(
 )
 
 vector_store = Pinecone(index=index, embedding=embeddings, text_key="text")
+
+
+def build_retriever(chat_args):
+    search_kwargs = {"filter": {"pdf_id": chat_args.pdf_id}}
+    return vector_store.as_retriever(
+        search_kwargs=search_kwargs
+    )
