@@ -10,6 +10,7 @@ from app.web.api import (
 )
 import random
 from app.chat.score import random_component_by_score
+from app.chat.tracing.langfuse import langfuse_callback_handler
 
 
 def select_component(component_type, component_map, chat_args):
@@ -60,5 +61,6 @@ def build_chat(chat_args: ChatArgs):
         llm=llm,
         memory=memory,
         retriever=retriever,
-        condense_question_llm=condense_question_llm
+        condense_question_llm=condense_question_llm,
+        callbacks=[langfuse_callback_handler]
     )
